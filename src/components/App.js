@@ -1,6 +1,8 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 import '../styles/App.css';
+
+import Movies from './Movies';
 
 const data = {
   '2018': [
@@ -27,9 +29,30 @@ const data = {
   ]
 }
 const App = () => {
+  const[selectedYear , setSelectedYear] =useState();
+  const onChnageHandler = (event) => {
+  
 
+    setSelectedYear(event.target.value);
+      }
   return (
     <div id="main">
+      <select onChange={onChnageHandler}> 
+      <option value={null}></option>
+        <option value="2018">2018</option>
+        <option value="2019">2019</option>
+        <option value="2020">2020</option>
+        <option value="2021">2021</option>
+        <option value="2022">2022</option>
+    </select>
+    
+      <div id="selected-year"> 
+      
+        {selectedYear ?  `Selected year-${selectedYear}` :  "No year selected"}
+
+      </div>
+  
+       { selectedYear && <Movies year={selectedYear} data={data}> </Movies>}
       
     </div>
   )
